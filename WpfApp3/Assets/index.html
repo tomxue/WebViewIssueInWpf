@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <script>
+
+        //通知后台
+        function func1()
+        {
+    
+                window.external.notify("this is a message");
+            
+        }
+
+        //这个方法用来接收后台的结果
+        function recieve(value)
+        {
+            output.textContent = value;
+        }
+
+    </script>
+</head>
+<body style="background-color:blue;">
+    <div style="margin-top:100px">
+        <button id="fun1Btn" onclick="func1();">Call method 1</button>
+        <div id="output"></div>
+    </div>
+</body>
+</html>
