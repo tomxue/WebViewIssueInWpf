@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,8 +42,11 @@ namespace WpfApp3
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             //我们事先写好了一个本地html页面用来做测试
-            this.wv.Source = new Uri("ms-appx-web://Assets/index.html");
+            //this.wv.Source = new Uri("ms-appx-web://Assets/index.html");
             //this.wv.Source = new Uri("http://www.baidu.com");
+
+            var html = File.ReadAllText("../../Assets\\index.html");
+            wv.NavigateToString(html);
         }
     }
 }
