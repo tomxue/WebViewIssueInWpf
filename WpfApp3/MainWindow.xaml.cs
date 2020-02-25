@@ -42,8 +42,8 @@ namespace WpfApp3
             this.InitializeComponent();
 
             this.wv.IsScriptNotifyAllowed = true;
-            //this.wv.ScriptNotify += Wv_ScriptNotify;
-            wv.RegisterName("wtjs", new myBridge());
+            this.wv.ScriptNotify += Wv_ScriptNotify;
+            //wv.RegisterName("wtjs", new myBridge());
 
             this.Loaded += MainPage_Loaded;
         }
