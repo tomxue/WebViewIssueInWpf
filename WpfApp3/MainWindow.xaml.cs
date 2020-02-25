@@ -24,7 +24,7 @@ namespace WpfApp3
     /// </summary>
     public partial class MainWindow : Window
     {
-        public class wtjs
+        public class myBridge
         {
             public void SetTitle(string title)
             {
@@ -42,8 +42,8 @@ namespace WpfApp3
             this.InitializeComponent();
 
             this.wv.IsScriptNotifyAllowed = true;
-            this.wv.ScriptNotify += Wv_ScriptNotify;
-            //wv.RegisterName("wtjs", new wtjs());
+            //this.wv.ScriptNotify += Wv_ScriptNotify;
+            wv.RegisterName("wtjs", new myBridge());
 
             this.Loaded += MainPage_Loaded;
         }
