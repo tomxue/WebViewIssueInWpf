@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,32 +24,50 @@ namespace WpfApp3
     /// </summary>
     public partial class MainWindow : Window
     {
+        public class wtjs
+        {
+            public void SetTitle(string title)
+            {
+                Debug.WriteLine("SetTitle is executing...title = {0}", title);
+            }
+
+            public void PlayTTS(string tts)
+            {
+                Debug.WriteLine("PlayTTS is executing...tts = {0}", tts);
+            }
+        }
+
         public MainWindow()
         {
             this.InitializeComponent();
 
+            this.wv.IsScriptNotifyAllowed = true;
             this.wv.ScriptNotify += Wv_ScriptNotify;
+            //wv.RegisterName("wtjs", new wtjs());
 
             this.Loaded += MainPage_Loaded;
         }
 
-        private async void Wv_ScriptNotify(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlScriptNotifyEventArgs e)
+        private void Wv_ScriptNotify(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlScriptNotifyEventArgs e)
         {
-            //await (new MessageDialog(e.Value)).ShowAsync();
             textBlock.Text = e.Value;
 
             //返回结果给html页面
-            await this.wv.InvokeScriptAsync("recieve", new[] { "hehe, 我是个结果" });
+            //await this.wv.InvokeScriptAsync("recieve", new[] { "hehe, 我是个结果" });
+        }
+
+        private void setTitle(string str)
+        {
+            textBlock.Text = str;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            //我们事先写好了一个本地html页面用来做测试
-            //this.wv.Source = new Uri("ms-appx-web://Assets/index.html");
-            //this.wv.Source = new Uri("http://www.baidu.com");
+            this.wv.Source = new Uri("http://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
+            //this.wv.Source = new Uri("https://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
 
-            var html = File.ReadAllText("../../Assets\\index.html");
-            wv.NavigateToString(html);
+            //var html = File.ReadAllText("../../Assets\\index.html");
+            //wv.NavigateToString(html);
         }
     }
 }
