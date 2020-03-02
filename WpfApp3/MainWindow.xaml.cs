@@ -24,16 +24,25 @@ namespace WpfApp3
     /// </summary>
     public partial class MainWindow : Window
     {
-        public class myBridge
+        public class MyBridge
         {
-            public void SetTitle(string title)
+            private readonly MainWindow _window;
+
+            public MyBridge(MainWindow window)
             {
-                Debug.WriteLine("SetTitle is executing...title = {0}", title);
+                _window = window;
             }
 
-            public void PlayTTS(string tts)
+            public void setTitle(string title)
             {
-                Debug.WriteLine("PlayTTS is executing...tts = {0}", tts);
+                Debug.WriteLine(string.Format("SetTitle is executing...title = {0}", title));
+
+                _window.setTitle(title);
+            }
+
+            public void playTTS(string tts)
+            {
+                Debug.WriteLine(string.Format("PlayTTS is executing...tts = {0}", tts));
             }
         }
 
@@ -42,15 +51,18 @@ namespace WpfApp3
             this.InitializeComponent();
 
             this.wv.IsScriptNotifyAllowed = true;
-            this.wv.ScriptNotify += Wv_ScriptNotify;
-            //wv.RegisterName("wtjs", new myBridge());
+            //this.wv.ScriptNotify += Wv_ScriptNotify;
+            this.wv.AddWebAllowedObject("wtjs", new MyBridge(this));
 
             this.Loaded += MainPage_Loaded;
         }
 
         private void Wv_ScriptNotify(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlScriptNotifyEventArgs e)
         {
-            textBlock.Text = e.Value;
+            if (e.IsNotification())
+            {
+                Debug.WriteLine(e.Value);
+            }
 
             //返回结果给html页面
             //await this.wv.InvokeScriptAsync("recieve", new[] { "hehe, 我是个结果" });
@@ -63,8 +75,8 @@ namespace WpfApp3
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.wv.Source = new Uri("http://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
-            //this.wv.Source = new Uri("https://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
+            //this.wv.Source = new Uri("http://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
+            this.wv.Source = new Uri("https://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
 
             //var html = File.ReadAllText("../../Assets\\index.html");
             //wv.NavigateToString(html);
