@@ -8,9 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Controls:WebView x:Name="wv" HorizontalAlignment="Left" Height="405" Margin="50,0,0,0" VerticalAlignment="Top" Width="725" RenderTransformOrigin="-0.45,-0.75"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="60" Width="335"/>
-
-        <Controls:WebView x:Name="wv" HorizontalAlignment="Left" Height="305" Margin="30,90,0,0" VerticalAlignment="Top" Width="725" RenderTransformOrigin="-0.45,-0.75"/>
-
     </Grid>
 </Window>
