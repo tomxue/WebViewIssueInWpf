@@ -76,7 +76,9 @@ namespace WpfApp3
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             //this.wv.Source = new Uri("http://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
-            this.wv.Source = new Uri("https://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
+            //this.wv.Source = new Uri("https://cmsdev.lenovo.com.cn/musichtml/leHome/weather/index.html?date=&city=&mark=0&speakerId=&reply=");
+            this.wv.Source = new Uri("http://s.weibo.com/weibo/%23%E5%88%98%E7%9C%9F%E5%8E%BB%E4%B8%96%23&luicode=&lfid=_h5&extparam=c_type%3D36&wm=");
+            this.wb.Source = new Uri("http://s.weibo.com/weibo/%23%E5%88%98%E7%9C%9F%E5%8E%BB%E4%B8%96%23&luicode=&lfid=_h5&extparam=c_type%3D36&wm=");
 
             //var html = File.ReadAllText("../../Assets\\index.html");
             //wv.NavigateToString(html);
